@@ -1,0 +1,11 @@
+public class Piramid {
+    public static void main(String[] args) {
+
+        String val = "0";
+
+        System.out.println(val.repeat(1));
+        System.out.println(val.repeat(3));
+        System.out.println(val.repeat(5));
+        System.out.println(val.repeat(7));
+    }
+}
