@@ -9,7 +9,10 @@ public class Piramid {
         System.out.println(val.repeat(7));
     }
 }
+
 /////////////////////////////////////////////////////////////////////////////////
+
+
 public class Piramid2 {
     public static void main(String[] args) {
 
@@ -21,5 +24,24 @@ public class Piramid2 {
         System.out.printf("%12s%n", val.repeat(7));
         System.out.printf("%12s%n", val.repeat(9));
         System.out.printf("%12s%n", val.repeat(11));
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+public class Piramid3 {
+    public static void main(String[] args) {
+
+        String val = "0";
+        String empty = " ";
+
+        int len = 19;
+
+        for (int i = 1; i < len; i += 2) {
+
+            System.out.printf("%s%s%n", empty.repeat(len-i / 2), val.repeat(i));
+            
+        }
+
     }
 }
