@@ -1,4 +1,4 @@
-public class Piramid {
+public class Pyramid {
     public static void main(String[] args) {
 
         String val = "0";
@@ -13,7 +13,7 @@ public class Piramid {
 /////////////////////////////////////////////////////////////////////////////////
 
 
-public class Piramid2 {
+public class Pyramid2 {
     public static void main(String[] args) {
 
         String val = "0";
@@ -29,7 +29,7 @@ public class Piramid2 {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-public class Piramid3 {
+public class Pyramid3 {
     public static void main(String[] args) {
 
         String val = "0";
