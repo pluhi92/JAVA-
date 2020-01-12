@@ -36,3 +36,24 @@ public class Palindrome {
         return isPalindrome;
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public static boolean isPalindrome(String word) {
+
+        char[] original = word.toCharArray();
+        {
+
+            char[] reversed = new char[original.length];
+
+            for (int i = original.length - 1, j = 0; i >= 0; i--, j++) {
+
+            reversed[j] = original[i];
+        }
+            return word.equals(new String(reversed));
+        }
+    }
+}
+
+
+
