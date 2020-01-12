@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 public class Resources {
     public static void main(String[] args) throws IOException {
 
-        var path = Paths.get("src/resorces/thermopzlae.txt");
+        var path = Paths.get("src/resorces/thermopylae.txt");
 
         var content = Files.readString(path);
         
