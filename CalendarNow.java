@@ -18,4 +18,21 @@ public class CalendarNow {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+package com.zetcode;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
+
+public class SimpleEx2 {
+
+
+    public static void main(String[] args) {
+
+        var now = Instant.now();
+        System.out.println(now);
+
+        var nov2 = LocalDate.now();
+        System.out.println(nov2);
+    }
+}
