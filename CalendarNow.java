@@ -34,5 +34,8 @@ public class CalendarNow2 {
 
         var nov2 = LocalDate.now();
         System.out.println(nov2);
+        
+        var _time = LocalTime.now();
+        System.out.println(_time);
     }
 }
