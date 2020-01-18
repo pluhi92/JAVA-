@@ -1,0 +1,50 @@
+package com.zetcode;
+
+
+public class DeleteSpaces {
+
+
+    public static void main(String[] args) {
+
+        String msg = """
+                Today           is a        beautiful           day.
+                There       are no               clouds in       the     sky.
+                """;
+
+
+        String modified = msg.replaceAll("[\\s]{2,}", " ");
+
+        System.out.println(modified);
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+package com.zetcode;
+
+
+
+import java.util.StringJoiner;
+
+public class DeleteSpaces2 {
+
+
+    public static void main(String[] args) {
+
+        String msg = """
+                Today           is a        beautiful           day.
+                There       are no               clouds in       the     sky.
+                """;
+
+
+       String[] parts = msg.split("[\\s]{2,}");
+
+        StringJoiner joiner = new StringJoiner(" ");
+
+            for (var cs: parts) {
+                joiner.add(cs);
+            }
+            String modified = joiner.toString();
+        System.out.println(modified);
+    }
+
+}
