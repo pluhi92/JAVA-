@@ -1,0 +1,28 @@
+package com.zetcode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+// latin characters only
+
+public class firstCharBig {
+
+    public static void main(String[] args) {
+
+        List<String> martialArts = new ArrayList<>();
+        martialArts.add("Silat");
+        martialArts.add("Wing chun");
+        martialArts.add("Karate");
+        martialArts.add("Judo");
+        martialArts.add("Aikido");
+
+        List<Character> firstletters = new ArrayList<>();
+        martialArts.forEach(e -> firstletters.add(e.charAt(0))); //0 je prve pismeno
+        System.out.println(firstletters);
+
+
+      
+
+
+    }
+}
