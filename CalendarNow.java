@@ -24,7 +24,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 
-public class SimpleEx2 {
+public class CalendarNow2 {
 
 
     public static void main(String[] args) {
