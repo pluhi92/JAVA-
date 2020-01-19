@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-public class CoutingNummersHTML {
+public class CountingNummersHTML {
     public static void main(String[] args) throws IOException {
 
         String url = "http://test.webcode.me/data.txt";
