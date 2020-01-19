@@ -24,7 +24,7 @@ public class CycleFor {
 package com.zetcode;
 
 
-public class CzcleFor2 {
+public class CycleFor2 {
 
 
     public static void main(String[] args) {
