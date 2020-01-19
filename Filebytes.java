@@ -15,6 +15,10 @@ public class Filebytes {
 
         System.out.printf("The file has %d bytes", fileSize);
 
+        var path2 = Paths.get("src/resources/thermopylae2.txt"); //COPY FILE
+
+        Files.copy(path, path2, StandardCopyOption.REPLACE_EXISTING); //COPY FILE
+
 
     }
 }
