@@ -44,7 +44,7 @@ public class RegExpressionsNUM2 {
         List<String> words = List.of("root", "boot",
                 "tool", "foot", "53452", "123", "nod", "spoon");
 
-        Pattern p = Pattern.compile("[0-9]+");
+        Pattern p = Pattern.compile("[0-9]+"); //Pattern p = Pattern.compile("\\d+");
 
         for (String word: words) {
 
