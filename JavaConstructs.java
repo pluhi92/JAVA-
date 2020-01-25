@@ -19,7 +19,7 @@ public class SimpleEx2 {
     public static void main(String[] args) {
 
 
-        new Being();
+        new Being(); //moyem vytvorit hocikolko Beingov
         new Being("Tom");
     }
 }
