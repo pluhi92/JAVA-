@@ -1,0 +1,80 @@
+
+TEXT MySQL
+
+
+
+DROP TABLE IF EXISTS cities;
+
+CREATE TABLE cities(id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), population BIGINT);
+
+INSERT INTO cities(name, population) VALUES('Bratislava', 432000); 
+INSERT INTO cities(name, population) VALUES('Budapest', 1759000); 
+INSERT INTO cities(name, population) VALUES('Prague', 1280000); 
+INSERT INTO cities(name, population) VALUES('Warsaw', 1748000); 
+INSERT INTO cities(name, population) VALUES('Los Angeles', 3971000); 
+INSERT INTO cities(name, population) VALUES('New York', 8550000); 
+INSERT INTO cities(name, population) VALUES('Edinburgh', 464000); 
+INSERT INTO cities(name, population) VALUES('Berlin', 3671000);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+MAVEN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zetcode</groupId>
+    <artifactId>MySQLVersionEx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+    </dependencies>
+
+</project>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.zetcode;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class MySQLVersionEx {
+    public static void main(String[] args) throws SQLException {
+
+        var url = "jdbc:mysql://localhost:3306/testdb?ssl=false";
+        var user = "root";
+        var passwd = "";
+
+        var sql = "SELECT * from cities";
+
+
+        try (var con = DriverManager.getConnection(url, user, passwd);
+             var stm = con.createStatement();
+             var rs = stm.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                var id = rs.getLong(1);
+                var name = rs.getString(2);
+                var population = rs.getInt(3);
+
+
+                System.out.printf("%d %s %d%n", id, name, population);
+            }
+        }
+    }
+}
