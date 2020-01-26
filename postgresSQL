@@ -55,6 +55,45 @@ public class PostrgreSQLVersion {
     }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class PostrgreSQLVersion {
+
+    public static void main(String[] args) {
+
+
+        String url = "jdbc:postgresql://localhost:5432/testdb";
+        String user = "postgres";
+        String password = "polipok22";
+
+        try (var con = DriverManager.getConnection(url, user, password);
+             var st = con.createStatement();) {
+
+        var updated = st.executeUpdate("UPDATE cities set population = 432002 where name = 'Bratislava' "); //PREPISOVANIE UDAJE DANEHO MESTA
+
+        if (updated == 1) {
+
+            System.out.println("column successfully updated");
+        }
+
+    } catch(
+    SQLException ex)
+
+    {
+
+        Logger lgr = Logger.getLogger(PostrgreSQLVersion.class.getName());
+        lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+    }
+}
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 MAVEN
 
 <?xml version="1.0" encoding="UTF-8"?>
