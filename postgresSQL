@@ -199,6 +199,55 @@ public class PostrgreSQLVersion4 {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class PostrgreSQLVersion5 {
+
+    private static int population;
+    private static String name;
+
+    public static void main(String[] args) {
+
+
+        String url = "jdbc:postgresql://localhost:5432/testdb";
+        String user = "postgres";
+        String password = "polipok22";
+
+        String sql = "SELECT * FROM cities";
+
+        try (var con = DriverManager.getConnection(url, user, password);
+             var pst = con.prepareStatement(sql);
+             var rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+
+                long id = rs.getLong(1);
+                String name = rs.getString(2);
+                int population = rs.getInt(3);
+
+
+                System.out.printf("%d %s %d%n", id, name, population);
+
+
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(PostrgreSQLVersion.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        }
+    }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 MAVEN
 
 <?xml version="1.0" encoding="UTF-8"?>
