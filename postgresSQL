@@ -39,7 +39,7 @@ public class PostrgreSQLVersion {
 
         try (var con = DriverManager.getConnection(url, user, password);
              var st = con.createStatement();
-             var rs = st.executeQuery("SELECT COUNT(id) FROM cities")) {
+             var rs = st.executeQuery("SELECT COUNT(id) FROM cities")) {  //TU SA MOZE PREPISOVAT HODNOTY PODLA SQL
 
             if (rs.next()) {
 
