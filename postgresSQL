@@ -19,3 +19,67 @@ INSERT INTO cities(name, population) VALUES('New York', 8550000);
 INSERT INTO cities(name, population) VALUES('Edinburgh', 464000);
 
 INSERT INTO cities(name, population) VALUES('Berlin', 3671000);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class PostrgreSQLVersion {
+
+    public static void main(String[] args) {
+
+
+        String url = "jdbc:postgresql://localhost:5432/testdb";
+        String user = "postgres";
+        String password = "polipok22";
+
+        try (var con = DriverManager.getConnection(url, user, password);
+             var st = con.createStatement();
+             var rs = st.executeQuery("SELECT COUNT(id) FROM cities")) {
+
+            if (rs.next()) {
+
+                System.out.printf("# of cities in the table: %d%n", rs.getInt(1));
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(PostrgreSQLVersion.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+MAVEN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zetcode</groupId>
+    <artifactId>PostgreSQLVersion</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.9</version>
+        </dependency>
+    </dependencies>
+
+</project>
+
+
