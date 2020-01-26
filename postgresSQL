@@ -35,7 +35,7 @@ public class PostrgreSQLVersion {
 
         String url = "jdbc:postgresql://localhost:5432/testdb";
         String user = "postgres";
-        String password = "polipok22";
+        String password = "";
 
         try (var con = DriverManager.getConnection(url, user, password);
              var st = con.createStatement();
@@ -68,7 +68,7 @@ public class PostrgreSQLVersion {
 
         String url = "jdbc:postgresql://localhost:5432/testdb";
         String user = "postgres";
-        String password = "polipok22";
+        String password = "";
 
         try (var con = DriverManager.getConnection(url, user, password);
              var st = con.createStatement();) {
