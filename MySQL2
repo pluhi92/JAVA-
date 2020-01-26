@@ -1,0 +1,98 @@
+MAVEN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zetcode</groupId>
+    <artifactId>MySQLVersionEx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.zetcode;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import java.sql.SQLException;
+
+public class MySQLVersionEx {
+    public static void main(String[] args) throws SQLException {
+
+        var url = "jdbc:mysql://localhost:3306/testdb?ssl=false";
+        var user = "root";
+        var passwd = "";
+
+        var ds = new SimpleDriverDataSource();
+        ds.setDriver(new com.mysql.cj.jdbc.Driver());
+        ds.setUrl(url);
+        ds.setUsername(user);
+        ds.setPassword(passwd);
+
+        var sql = "SELECT COUNT(*) FROM cities";
+
+        var jtm = new JdbcTemplate(ds);
+        var numOfCities = jtm.queryForObject(sql, Integer.class);
+
+        System.out.format("There are %d cities in the table", numOfCities);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.zetcode;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import java.sql.SQLException2;
+
+public class MySQLVersionEx {
+    public static void main(String[] args) throws SQLException {
+
+        var url = "jdbc:mysql://localhost:3306/testdb?ssl=false";
+        var user = "root";
+        var passwd = "";
+
+        var ds = new SimpleDriverDataSource();
+        ds.setDriver(new com.mysql.cj.jdbc.Driver());
+        ds.setUrl(url);
+        ds.setUsername(user);
+        ds.setPassword(passwd);
+
+        var sql = "SELECT name FROM cities WHERE id = 3"; //TU SA MENI
+
+        var jtm = new JdbcTemplate(ds);
+        var numOfCities = jtm.queryForObject(sql, String.class); //POYOR NAMIESTO Integer je String.class
+
+        System.out.format("There name with id 3 is: %s", numOfCities); //TU SA MENI
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
