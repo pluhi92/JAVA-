@@ -28,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class PostrgreSQLVersion {
+public class PostrgreSQLVersion1 {
 
     public static void main(String[] args) {
 
@@ -61,7 +61,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class PostrgreSQLVersion {
+public class PostrgreSQLVersion2 {
 
     public static void main(String[] args) {
 
@@ -94,6 +94,51 @@ public class PostrgreSQLVersion {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class PostrgreSQLVersion3 {
+
+    public static void main(String[] args) {
+
+
+        String url = "jdbc:postgresql://localhost:5432/testdb";
+        String user = "postgres";
+        String password = "";
+
+        int population = 432001;
+        String name = "Bratislava";
+
+        String sql = "UPDATE cities set population = ? where name = ?";
+
+        try (var con = DriverManager.getConnection(url, user, password);
+             var pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1, population);
+            pst.setString(2, name);
+            int updated = pst.executeUpdate();
+
+
+            if (updated == 1) {
+
+                System.out.println("column successfully updated");
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(PostrgreSQLVersion.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 MAVEN
 
 <?xml version="1.0" encoding="UTF-8"?>
