@@ -1,0 +1,79 @@
+package com.zetcode;
+
+import com.zetcode.model.City;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class MySQLVersionEx {
+    public static void main(String[] args) throws SQLException {
+
+        var url = "jdbc:mysql://localhost:3306/testdb?ssl=false";
+        var user = "root";
+        var passwd = "";
+
+        var ds = new SimpleDriverDataSource();
+        ds.setDriver(new com.mysql.cj.jdbc.Driver());
+        ds.setUrl(url);
+        ds.setUsername(user);
+        ds.setPassword(passwd);
+
+        var sql = "SELECT * FROM cities LIMIT 4";
+
+        var jtm = new JdbcTemplate(ds);
+        List<City> cities = jtm.query(sql,
+                BeanPropertyRowMapper.newInstance(City.class));
+
+        cities.forEach(System.out::println);
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+City.java
+
+
+package com.zetcode.model;
+
+public class City {
+    private Long id;
+    private String name;
+    private Integer population;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(Integer population) {
+        this.population = population;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", population=" + population +
+                '}';
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
