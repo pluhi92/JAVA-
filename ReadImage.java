@@ -24,4 +24,33 @@ public class ReadImage {
         }
     }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.zetcode;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class JavaIOStreamEx {
+    public static void main(String[] args) throws IOException {
+
+        try (FileInputStream fis = new FileInputStream("src/resources/favicon.ico")) {
+
+            byte[] data = fis.readAllBytes();
+
+            int i = 0;
+
+            for (byte b : data) {
+
+                System.out.printf("%02x ", b);
+                i++;
+
+                if (i % 10 == 0) {
+                    System.out.println();
+                }
+            }
+        }
+    }
+}
+
 
