@@ -1,0 +1,240 @@
+MAVEN
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zetcode</groupId>
+    <artifactId>JavaWebFormEx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.14.v20181114</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CitiesServlet
+
+
+package com.zetcode.web;
+
+import com.zetcode.model.City;
+import com.zetcode.service.CityService;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet(name = "CitiesServlet", urlPatterns = {"/CitiesServlet"})
+public class CitiesServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        response.setContentType("text/plain;charset=UTF-8");
+
+        List<City> cities = CityService.getAllCities();
+
+        request.setAttribute("cities", cities);
+        var dispatcher = request.getRequestDispatcher("showCities.jsp");
+
+        dispatcher.forward(request, response);
+
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Cities
+
+package com.zetcode.service;
+
+import com.zetcode.model.City;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CityService {
+
+    public static List<City> getAllCities() {
+
+        List<City> cities = new ArrayList<>();
+
+        cities.add(new City(1L, "Bratislava", 432000));
+        cities.add(new City(2L, "Budapest", 1759000));
+        cities.add(new City(3L, "Prague", 1280000));
+        cities.add(new City(4L, "Warsaw", 1748000));
+        cities.add(new City(5L, "Los Angeles", 3971000));
+        cities.add(new City(6L, "New York", 8550000));
+        cities.add(new City(7L, "Edinburgh", 464000));
+        cities.add(new City(8L, "Berlin", 3671000));
+
+        return cities;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+index.html
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<form action="/processForm">
+
+<input type="text" name="username">
+<button type="submit">Send</button>
+
+</form>
+
+<a href="CitiesServlet">Show cities</a>
+
+</body>
+</html>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+City
+
+package com.zetcode.model;
+
+public class City {
+
+    private Long id;
+    private String name;
+    private int population;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public City(Long id, String name, int population) {
+        this.id = id;
+        this.name = name;
+        this.population = population;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+ShowCities.jps
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cities</title>
+</head>
+<body>
+<h2>Cities</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Population</th>
+    </tr>
+    </thead>
+
+    <tbody>
+                   <c:forEach items="${cities}" var="city">
+                   <tr>
+                       <td>${city.id}</td>
+                       <td>${city.name}</td>
+                       <td>${city.population}</td>
+                   </tr>
+                   </c:forEach>
+               </tbody>
+           </table>
+       </body>
+   </html>
+   
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+show.jps
+   
+   <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP Page</title>
+</head>
+<body>
+
+<%= "Hello World!" %>
+<%= (new java.util.Date()).toLocaleString() %>
+<p> Hello <c:out value="${username}"/> </p>
+<p> Hello ${username} </p>
+</body>
+</html>
