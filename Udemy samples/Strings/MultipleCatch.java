@@ -21,7 +21,13 @@ public class TestEx {
             System.out.println("IO Error");
 
         } catch (ArithmeticException e) {
-            System.out.println("Arithmetic Error" + e);
+            System.out.println("Arithmetic Error " + e);
+
+        } catch (Exception e) {
+            System.out.println("Unknown Exeption ");
+
+        } finally {
+            System.out.println("|");
 
         }
         System.out.println(k);
