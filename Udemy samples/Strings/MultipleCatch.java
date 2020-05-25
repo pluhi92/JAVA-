@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class TestEx {
+public class MultipleCatch {
     public static void main(String[] args) {
 
         int i, j, k = 0;
