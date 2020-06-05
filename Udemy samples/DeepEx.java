@@ -15,8 +15,8 @@ public class DeepEx {
 
         obj1.j = 8;
 
-        System.out.println(obj1);
-        System.out.println(obj);
+        System.out.println(obj1);   //5, 8
+        System.out.println(obj);    //5, 6
     }
 }
 
