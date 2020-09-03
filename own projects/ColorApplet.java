@@ -8,7 +8,7 @@ public class ColorApplet extends Frame implements ActionListener {
 
     Button red, green, blue, Andrejka, exit;
 
-    public GraphicTableEx() {
+    public ColorApplet() {
 
         red = new Button("Red");
         green = new Button("Green");
@@ -34,7 +34,7 @@ public class ColorApplet extends Frame implements ActionListener {
 
     public static void main(String[] args) {
 
-        GraphicTableEx c = new GraphicTableEx();
+        ColorApplet c = new ColorApplet();
         c.setTitle("Andrejka");
         c.setSize(500, 300);
         c.setVisible(true);
