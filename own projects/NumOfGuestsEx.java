@@ -40,7 +40,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class ProbaEx {
+public class NumOfGuestsEx2 {
     public static void main(String[] args) throws java.io.IOException {
 
         int guests[] = new int[10];
