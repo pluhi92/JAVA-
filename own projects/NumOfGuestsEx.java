@@ -31,3 +31,48 @@ public class NumOfGuestsEx {
     }
 
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.pluhi;
+
+import java.io.File;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+public class ProbaEx {
+    public static void main(String[] args) throws java.io.IOException {
+
+        int guests[] = new int[10];
+        int gRoom;
+
+        Scanner sc = new Scanner(new File("src/GuestList.txt"));
+        for (gRoom = 0; gRoom < 10; gRoom++) {
+            guests[gRoom] = sc.nextInt();
+        }
+        sc.close();
+
+        gRoom = 0;
+        while (gRoom < 10 && guests[gRoom] != 0) {
+            gRoom++;
+        }
+        if (gRoom == 10) {
+            System.out.println("The hotel is unfortunately full");
+        } else {
+            System.out.print("How many people ");
+            System.out.print("should I book room ");
+            System.out.print(gRoom + ". for");
+
+            Scanner sc1 = new Scanner(System.in);
+            guests[gRoom] = sc1.nextInt();
+            sc1.close();
+
+            PrintStream updatedList = new PrintStream("src/GuestList.txt");
+            for (gRoom = 0; gRoom < 10; gRoom++) {
+                updatedList.print(guests[gRoom]);
+                updatedList.print(" ");
+            }
+            updatedList.close();
+        }
+    }
+}
